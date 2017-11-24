@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Grid, Image, Button } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 class RoomCell extends Component {
   state = {};
   render() {
@@ -21,7 +22,9 @@ class RoomCell extends Component {
           <Button.Group>
             <Button>View</Button>
             <Button.Or />
-            <Button positive>Book</Button>
+            <Link to="/book">
+              <Button positive>Book</Button>
+            </Link>
           </Button.Group>
         </Grid.Column>
       </Grid>

@@ -2586,6 +2586,10 @@ flat-cache@^1.2.1:
     graceful-fs "^4.1.2"
     write "^0.2.1"
 
+flatpickr@^4.0.5, flatpickr@^4.1.2:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/flatpickr/-/flatpickr-4.1.2.tgz#2bbebe46e1fd74d7ef10bf987229aa23eaac1265"
+
 flatten@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/flatten/-/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
@@ -5160,6 +5164,13 @@ react-dom@^16.1.1:
 react-error-overlay@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-3.0.0.tgz#c2bc8f4d91f1375b3dad6d75265d51cd5eeaf655"
+
+react-flatpickr@^3.6.3:
+  version "3.6.3"
+  resolved "https://registry.yarnpkg.com/react-flatpickr/-/react-flatpickr-3.6.3.tgz#a4d5ab83b2159192f3c68981e86e721bd67d562a"
+  dependencies:
+    flatpickr "^4.0.5"
+    prop-types "^15.5.10"
 
 react-redux@^5.0.6:
   version "5.0.6"
