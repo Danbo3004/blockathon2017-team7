@@ -19,7 +19,7 @@ contract BookingList {
     bytes32 fromDate;
     bytes32 toDate;
     // price
-    bytes32 finalPrice;
+    uint256 finalPrice;
     // wallet address of referee
     address refereeAddr;
   }
@@ -37,11 +37,14 @@ contract BookingList {
                         // booking info
                         bytes32 fromDate, bytes32 toDate,
                         // price
-                        bytes32 finalPrice,
+                        uint256 finalPrice,
                         // wallet address of referee
                         address refereeAddr
                         ) payable public returns (bytes32 bookingId) 
   {
+    if (msg.value < finalPrice) {
+      return "";
+    }
     // save new booking
     var bi = BookingInfo(userId, isBreakfast, isWindowsView, isSmoking, isFreeCancellation, numOfSingleBeds, numOfDoubleBeds, numOfAdults, numOfChildren, area, fromDate, toDate, finalPrice, refereeAddr);
     bookingId = keccak256(bi);
@@ -49,7 +52,7 @@ contract BookingList {
     
     // transfer placeholder money to referee
     refereeAddr.transfer(msg.value);
-
+    
     return bookingId;
   }
 
@@ -57,7 +60,8 @@ contract BookingList {
                                                               bytes32, 
                                                               bool, bool, bool, bool, 
                                                               uint, uint, uint, uint, uint,
-                                                              bytes32, bytes32, bytes32,
+                                                              bytes32, bytes32, 
+                                                              uint256,
                                                               address) 
   {
     return (
