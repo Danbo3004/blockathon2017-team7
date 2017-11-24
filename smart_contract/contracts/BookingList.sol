@@ -20,6 +20,8 @@ contract BookingList {
     bytes32 toDate;
     // price
     bytes32 finalPrice;
+    // wallet address of referee
+    address refereeAddr;
   }
     
   mapping (bytes32 => BookingInfo) bookingList;
@@ -27,7 +29,7 @@ contract BookingList {
   function BookingList() {
   }
 
-  function addNewBooking(
+  function addNewBooking (
                         // user info
                         bytes32 userId,
                         bool isBreakfast, bool isWindowsView, bool isSmoking, bool isFreeCancellation,
@@ -35,11 +37,19 @@ contract BookingList {
                         // booking info
                         bytes32 fromDate, bytes32 toDate,
                         // price
-                        bytes32 finalPrice) public returns (bytes32 bookingId) 
+                        bytes32 finalPrice,
+                        // wallet address of referee
+                        address refereeAddr
+                        ) payable public returns (bytes32 bookingId) 
   {
-    var bi = BookingInfo(userId, isBreakfast, isWindowsView, isSmoking, isFreeCancellation, numOfSingleBeds, numOfDoubleBeds, numOfAdults, numOfChildren, area, fromDate, toDate, finalPrice);
+    // save new booking
+    var bi = BookingInfo(userId, isBreakfast, isWindowsView, isSmoking, isFreeCancellation, numOfSingleBeds, numOfDoubleBeds, numOfAdults, numOfChildren, area, fromDate, toDate, finalPrice, refereeAddr);
     bookingId = keccak256(bi);
     bookingList[bookingId] = bi;
+    
+    // transfer placeholder money to referee
+    refereeAddr.transfer(msg.value);
+
     return bookingId;
   }
 
@@ -47,7 +57,8 @@ contract BookingList {
                                                               bytes32, 
                                                               bool, bool, bool, bool, 
                                                               uint, uint, uint, uint, uint,
-                                                              bytes32, bytes32, bytes32) 
+                                                              bytes32, bytes32, bytes32,
+                                                              address) 
   {
     return (
       bookingList[key].userId,
@@ -62,7 +73,8 @@ contract BookingList {
       bookingList[key].area,
       bookingList[key].fromDate,
       bookingList[key].toDate,
-      bookingList[key].finalPrice
+      bookingList[key].finalPrice,
+      bookingList[key].refereeAddr
     );
   }
 }
