@@ -34,14 +34,6 @@ const Wireframe = () => {
         src="http://1.semantic-ui.com/images/wireframe/paragraph.png"
         style={{ marginTop: "2em" }}
       />
-      <Image
-        src="http://1.semantic-ui.com/images/wireframe/paragraph.png"
-        style={{ marginTop: "2em" }}
-      />
-      <Image
-        src="http://1.semantic-ui.com/images/wireframe/paragraph.png"
-        style={{ marginTop: "2em" }}
-      />
       <RoomReview />
     </Container>
   );
@@ -52,7 +44,6 @@ const date = "3 days ago";
 const summary = "Laura Faucet created a post";
 const extraText =
   "Have you seen what's going on in Israel? Can you believe it.";
-
 const RoomReview = () => {
   return (
     <Segment>
@@ -68,20 +59,18 @@ const RoomReview = () => {
           summary={summary}
           extraText={extraText}
         />
-
-        <Feed.Event>
-          <Feed.Label image={image} />
-          <Feed.Content date={date} summary={summary} extraText={extraText} />
-        </Feed.Event>
-
-        <Feed.Event>
-          <Feed.Label image={image} />
-          <Feed.Content>
-            <Feed.Date content={date} />
-            <Feed.Summary content={summary} />
-            <Feed.Extra text content={extraText} />
-          </Feed.Content>
-        </Feed.Event>
+        <Feed.Event
+          image={image}
+          date={date}
+          summary={summary}
+          extraText={extraText}
+        />
+        <Feed.Event
+          image={image}
+          date={date}
+          summary={summary}
+          extraText={extraText}
+        />
       </Feed>
     </Segment>
   );

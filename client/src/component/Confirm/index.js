@@ -76,7 +76,11 @@ class History extends Component {
         </Header>
         <Header>Total (VND): ₫3088120</Header>
         <Link to="/history">
-          <Button color="green" onClick={() => this.confirmBook()}>
+          <Button
+            color="green"
+            onClick={() => this.confirmBook()}
+            floated="right"
+          >
             Confirm book
           </Button>
         </Link>
