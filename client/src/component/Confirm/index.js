@@ -7,7 +7,22 @@ class History extends Component {
   state = {};
 
   confirmBook() {
-    axios.get('/roomList')
+    axios.post('/addNewBooking', {
+      "userId": "123456",
+      "isBreakfast": true,
+      "isWindowsView": true,
+      "isSmoking": true,
+      "isFreeCancellation": true,
+      "numOfSingleBeds": 2,
+      "numOfDoubleBeds": 0,
+      "numOfAdults": 0,
+      "numOfChildren": 0,
+      "area": 20,
+      "fromDate": "2017/11/20",
+      "toDate": "2017/11/22",
+      "finalPrice": 2000000,
+      "refereeAddr": "0x2903ad3bb2d6d1eeec2ed32c6ca98bc20301d653"
+    })
       .then(function (response) {
         console.log(response);
       })

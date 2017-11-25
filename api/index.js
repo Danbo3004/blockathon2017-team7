@@ -24,7 +24,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post('/addNewBooking', (req, res) => {
     console.log(req.body);
+    // check balance
+
     // call to addNewBooking
+    res.send('addNewBooking');
 });
 
 app.post('/addReview', (req, res) => {
