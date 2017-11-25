@@ -18,18 +18,7 @@ import Picker from "./Picker";
 const Wireframe = () => {
   return (
     <Container text style={{ marginTop: "7em" }} textAlign="center">
-      <Header as="h1">CHARMING, VERY SPACIOUS & BEST LOCATED</Header>
-      <p>
-        <Icon name="male" /> 8 guests <Icon name="external" /> 3 bedrooms{" "}
-        <Icon name="bed" /> 0 beds <Icon name="bath" /> 2 baths
-      </p>
-      <p>
-        Very spacious apartment located in a modernist luxury building. Only a
-        10m walk to Plaza Catalunya and main sights. Fully equipped. 3 double
-        bedrooms + 2 complete bathrooms + Giant living room & kitchen. Luxury
-        details in a unique Barcelona style decoration.
-      </p>
-
+      <Header as="h1">YOUR CHOSEN ROOM</Header>
       <Image
         src="http://1.semantic-ui.com/images/wireframe/paragraph.png"
         style={{ marginTop: "2em" }}
@@ -49,23 +38,11 @@ const RoomReview = () => {
   return (
     <Segment>
       <Header>
-        169 Reviews
+        1 Reviews
         <Rating icon="star" defaultRating={4.5} maxRating={5} />
       </Header>
       <Divider />
       <Feed>
-        <Feed.Event
-          image={image}
-          date={date}
-          summary={summary}
-          extraText={extraText}
-        />
-        <Feed.Event
-          image={image}
-          date={date}
-          summary={summary}
-          extraText={extraText}
-        />
         <Feed.Event
           image={image}
           date={date}
@@ -94,7 +71,7 @@ class Book extends Component {
     const { calculations, contextRef } = this.state;
 
     return (
-      <Segment padded>
+      <Segment>
         <Wireframe />
       </Segment>
     );
