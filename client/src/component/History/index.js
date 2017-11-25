@@ -21,6 +21,9 @@ class History extends Component {
         <div>3 guests</div>
         <div>Nov 29, 2017 --> Nov 30, 2017</div>
         <div>Total (VND) ₫3088120</div>
+        <Link to="/review">
+          <Button color="orange">Write a review</Button>
+        </Link>
       </Container>
     );
   }
