@@ -16,6 +16,8 @@ const bookingContractAddr = '0x16C4CEEC682B370C0A4a29F4bEDCb90d8De62450';
 const transferContractAbi = '';
 const transferContractAddr = '';
 
+const defaultAcc = "0xF026bef6694D16c4F8dF3E5279Ab8801E8B2B4dd";
+
 const bookingListContract = web3.eth.contract(JSON.parse(bookingContractAbi)).at(bookingContractAddr);
 // const transferContract = web3.eth.contract(transferContractAbi).at(transferContractAddr);
 
@@ -23,12 +25,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post('/addNewBooking', (req, res) => {
+    console.log('addNewBooking');
     console.log(req.body);
     // check balance
 
     // call to addNewBooking
-    bookingListContract.getBookingInfoByKey('123456', { from: '0xF026bef6694D16c4F8dF3E5279Ab8801E8B2B4dd', gas: 500000 }, (error, info) => {
-        console.log('Info: ', info.toString(10))
+    bookingListContract.getBookingInfoByKey('123456', { from: defaultAcc, gas: 500000 }, (error, info) => {
+        console.log('Info: ', info)
     });
 
     res.send('addNewBooking');
@@ -36,7 +39,11 @@ app.post('/addNewBooking', (req, res) => {
 
 app.post('/addReview', (req, res) => {
     console.log('addReview');
-    // call to addNewReview
+    console.log(req.body);
+    // call to addReview
+    bookingListContract.addNewReview(req.body.roomId, req.body.rate, req.body.comment, { from: defaultAcc, gas: 500000 }, (error, info) => {
+        console.log('Info: ', info)
+    });
 });
 
 app.post('/transferMoney', (req, res) => {
