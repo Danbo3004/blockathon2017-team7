@@ -3,6 +3,9 @@ import { BrowserRouter, Route } from "react-router-dom";
 import Header from "./Header";
 import Home from "./Home";
 import Book from "./Book";
+import Login from "./Login";
+import Confirm from "./Confirm";
+import History from "./History";
 
 class App extends Component {
   render() {
@@ -12,6 +15,9 @@ class App extends Component {
           <Header />
           <Route exact path="/" component={Home} />
           <Route exact path="/book" component={Book} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/confirm" component={Confirm} />
+          <Route exact path="/history" component={History} />
         </div>
       </BrowserRouter>
     );

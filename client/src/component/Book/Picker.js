@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Menu, Icon, Dropdown, Button } from "semantic-ui-react";
-
 import Flatpickr from "react-flatpickr";
+import { Link } from "react-router-dom";
 
 const overlayStyle = {
   float: "left",
@@ -46,7 +46,9 @@ class Picker extends Component {
             ₫2,756,409 x 1 night ₫2,756,409 Service fee ₫350,391 Total
             ₫3,106,800
           </div>
-          <Button color="red">Request to book</Button>
+          <Link to="/login">
+            <Button color="red">Request to book</Button>
+          </Link>
         </Menu>
       </div>
     );
