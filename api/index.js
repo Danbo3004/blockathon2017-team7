@@ -17,7 +17,12 @@ const bookingContractAddr = '0x9dcdcfa8D682e2E9d142dcd5614092e72604F0C5';
 const transferContractAbi = '';
 const transferContractAddr = '';
 
-const defaultAcc = "0xF026bef6694D16c4F8dF3E5279Ab8801E8B2B4dd";
+const userAcc = "0xF026bef6694D16c4F8dF3E5279Ab8801E8B2B4dd";
+const userAccPk = "52f13c2fe2f99e53588eed126380d2e84d02ef867b0b0fce2df40a9de2a534b7";
+// acc btc
+const btcAcc = "0x5ad558987acfdba1f3e0f7aa4790fe264353b451";
+
+const refereeAcc = "0xAbC7Ce327EEac6D5CF989cE8b21213Db91d56bc9";
 
 const bookingListContract = web3.eth.contract(JSON.parse(bookingContractAbi)).at(bookingContractAddr);
 // const transferContract = web3.eth.contract(transferContractAbi).at(transferContractAddr);
@@ -25,51 +30,42 @@ const bookingListContract = web3.eth.contract(JSON.parse(bookingContractAbi)).at
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/addNewBooking', (req, res) => {
-    console.log('addNewBooking');
-    console.log(req.body);
-    // check balance
-
-    // call to addNewBooking
-
+var transferMoneyByRawTx = function (toAddr) {
     web3.eth.getAccounts((error, accounts) => {
         console.log(accounts)
-        web3.eth.getTransactionCount(defaultAcc, (error, txCount) => {
-            let privKey = new Buffer('52f13c2fe2f99e53588eed126380d2e84d02ef867b0b0fce2df40a9de2a534b7', 'hex')
+        web3.eth.getTransactionCount(userAcc, (error, txCount) => {
+            let privKey = new Buffer(userAccPk, 'hex')
             let rawTransactionObj = {
-                nonce: web3.toHex(txCount), to: '0xAbC7Ce327EEac6D5CF989cE8b21213Db91d56bc9',
+                nonce: web3.toHex(txCount), to: toAddr,
                 value: web3.toHex(web3.toWei(0.01, 'ether')), gasPrice: web3.toHex(21000),
                 gasLimit: web3.toHex(300000),
             }
             let tx = new Tx(rawTransactionObj);
-            tx.sign(privKey)
-            let serializeTx = '0x' + tx.serialize().toString('hex')
-    
-            bookingListContract.addNewBooking.sendTransaction('BookingInfo', { from: defaultAcc, gas: 500000 }, (error, info) => {
-                console.log(info);
-                console.log(error);
-            });
-
-            // web3.eth.sendRawTransaction(serializeTx, (error, txHash) => {
-            //     console.log(txHash)
-            // })
+            tx.sign(privKey);
+            let serializeTx = '0x' + tx.serialize().toString('hex');
+            web3.eth.sendRawTransaction(serializeTx, (error, txHash) => {
+                console.log(txHash)
+            })
         })
     })
+}
 
-    //   );
-
-    // bookingListContract.addNewBooking('BookingInfo', { from: defaultAcc, gas: 500000 }, (error, info) => {
-    //     console.log('Info: ', info)
-    // });
+app.get('/addNewBooking', (req, res) => {
+    console.log('addNewBooking');
+    // send $ to referee
+    transferMoneyByRawTx(refereeAcc);
+    // call to addNewBooking
+    bookingListContract.addNewBooking('BookingInfo', { from: btcAcc, gas: 500000 }, (error, info) => {
+        console.log('Info: ', info)
+    });
 
     res.send('addNewBooking');
 });
 
 app.post('/addReview', (req, res) => {
     console.log('addReview');
-    console.log(req.body);
     // call to addReview
-    bookingListContract.addNewReview(req.body.roomId, req.body.rate, req.body.comment, { from: defaultAcc, gas: 500000 }, (error, info) => {
+    bookingListContract.addNewReview(req.body.roomId, req.body.rate, req.body.comment, { from: userAcc, gas: 500000 }, (error, info) => {
         console.log('Info: ', info);
     });
 

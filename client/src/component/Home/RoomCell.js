@@ -22,28 +22,32 @@ class RoomCell extends Component {
               fluid
             />
           </Grid.Column>
-          <Grid.Column width={8}>
+          <Grid.Column width={3}>
             <Container fluid>
               <p>
-                <Icon name="home" />Hướng phòng: Đường phố
+                <Icon name="home" />City View
               </p>
               <p>
                 <Icon name="resize horizontal" />20 m²/215 ft²
               </p>
               <p>
-                <Icon name="ban" />được hút thuốc
+                <Icon name="ban" />Free cancellation
+              </p>
+            </Container>
+          </Grid.Column>
+          <Grid.Column width={3}>
+            <Container fluid>
+              <p>
+                <Icon name="hotel" />1 king bed or 2 single beds
               </p>
               <p>
-                <Icon name="hotel" />1 phong doi
-              </p>
-              <p>
-                <Icon name="s15" />voi hoa sen
+                <Icon name="s15" />Separate shower/bathtub
               </p>
             </Container>
           </Grid.Column>
           <Grid.Column width={1} verticalAlign="middle">
             <Button.Group>
-              <Button>263.677₫</Button>
+              <Button>263 ETH</Button>
               <Button.Or text="&" />
               <Link to="/book">
                 <Button positive>Book</Button>
