@@ -42,6 +42,10 @@ app.get('/roomList', (req, res) => {
 
 app.get('/login', (req, res) => {
     console.log('login');
+    res.send({
+        userId: '123456',
+        addr: '0xF026bef6694D16c4F8dF3E5279Ab8801E8B2B4dd'
+    });
 });
 
 app.listen(PORT);

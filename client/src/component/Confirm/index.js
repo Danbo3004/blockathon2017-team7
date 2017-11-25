@@ -1,9 +1,21 @@
 import React, { Component } from "react";
 import { Container, Header, Image, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import axios from 'axios';
 
 class History extends Component {
   state = {};
+
+  confirmBook() {
+    axios.get('/roomList')
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   render() {
     return (
       <Container text style={{ marginTop: "7em" }}>
@@ -22,7 +34,7 @@ class History extends Component {
         <div>Nov 29, 2017 --> Nov 30, 2017</div>
         <div>Total (VND) ₫3088120</div>
         <Link to="/history">
-          <Button color="green">Confirm book</Button>
+          <Button color="green" onClick={() => this.confirmBook()}>Confirm book</Button>
         </Link>
       </Container>
     );
