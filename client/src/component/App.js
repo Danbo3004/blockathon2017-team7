@@ -7,6 +7,7 @@ import Login from "./Login";
 import Confirm from "./Confirm";
 import History from "./History";
 import Review from "./Review";
+import Admin from "./Admin";
 
 class App extends Component {
   render() {
@@ -20,6 +21,7 @@ class App extends Component {
           <Route exact path="/confirm" component={Confirm} />
           <Route exact path="/history" component={History} />
           <Route exact path="/review" component={Review} />
+          <Route path="/admin" component={Admin} />
         </div>
       </BrowserRouter>
     );
