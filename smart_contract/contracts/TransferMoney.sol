@@ -40,6 +40,7 @@ contract TransferMoney {
 
         Transfer(0x0, msg.sender, amount);
     }
+    
     function balanceOf(address _addr) public constant returns (uint256) {
         return balances[_addr];
     }
