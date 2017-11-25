@@ -25,15 +25,31 @@ class Picker extends Component {
             search
             selection
             options={guestOptions}
+            upward
           />
         </Menu.Item>
-        <Flatpickr
-          data-enable-time
-          value={this.state.date}
-          onChange={date => {
-            this.setState({ date });
-          }}
-        />
+
+        <Label>
+          <Icon name="marker" />
+          <Flatpickr
+            data-enable-time
+            value={this.state.date}
+            onChange={date => {
+              this.setState({ date });
+            }}
+          />
+        </Label>
+
+        <Label>
+          <Icon name="location arrow" />
+          <Flatpickr
+            data-enable-time
+            value={this.state.date}
+            onChange={date => {
+              this.setState({ date });
+            }}
+          />
+        </Label>
 
         <Link to="/login">
           <Button color="red">Request to book</Button>
