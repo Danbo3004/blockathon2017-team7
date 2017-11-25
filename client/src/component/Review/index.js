@@ -34,13 +34,12 @@ class Review extends Component {
   render() {
     return <Container text style={{ marginTop: "7em" }}>
         <Header as="h1">CHARMING, VERY SPACIOUS & BEST LOCATED</Header>
-        <Header as="h3">Rate service</Header>
         <ReactStars count={5} onChange={this.ratingChanged} size={50} color2={"#ffd700"} />
         <Form>
-          <Form.Field id="form-textarea-control-opinion" control={TextArea} label="Comment" placeholder="Place your opinion" style={{ minHeight: 250 }} />
+          <Form.Field id="form-textarea-control-opinion" control={TextArea} placeholder="Place your opinion" style={{ minHeight: 250 }} />
         </Form>
         <Link to="/">
-          <Button color="orange" onClick={() => {
+          <Button color="green" onClick={() => {
               this.addReview();
             }} style={{ marginTop: 15 }}
             floated="right">

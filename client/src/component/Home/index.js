@@ -7,7 +7,8 @@ import {
   Button,
   Container,
   Icon,
-  Divider
+  Divider,
+  Header
 } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
@@ -112,6 +113,7 @@ class Home extends Component {
   render() {
     return (
       <Container textAlign="justified" style={{ marginTop: 100 }}>
+        <Header as="h1">OUR DISCOUNTS NOW</Header>
         {this.renderListRoom()}
       </Container>
     );

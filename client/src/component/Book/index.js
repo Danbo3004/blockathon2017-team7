@@ -18,7 +18,7 @@ import Picker from "./Picker";
 const Wireframe = () => {
   return (
     <Container text style={{ marginTop: "7em" }} textAlign="center">
-      <Header as="h1">YOUR CHOSEN ROOM</Header>
+      <Header as="h1">CHARMING, VERY SPACIOUS & BEST LOCATED</Header>
       <Image
         src="http://1.semantic-ui.com/images/wireframe/paragraph.png"
         style={{ marginTop: "2em" }}
