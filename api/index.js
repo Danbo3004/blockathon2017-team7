@@ -3,15 +3,16 @@ const bodyParser = require("body-parser")
 const Web3 = require('web3')
 const Tx = require('ethereumjs-tx')
 
-const configs = require('./config')
+// const configs = require('./config')
 
 const app = express();
 const PORT = process.env.PORT || 9999;
 
-const web3 = new Web3(new Web3.providers.HttpProvider(configs.host));
+const web3 = new Web3(new Web3.providers.HttpProvider('http://www.blockathon.asia:8545/'));
+// const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545/'));
 
-const bookingContractAbi = '[ { "constant": false, "inputs": [ { "name": "roomId", "type": "bytes32" }, { "name": "rate", "type": "uint256" }, { "name": "comment", "type": "bytes32" } ], "name": "addNewReview", "outputs": [], "payable": false, "type": "function" }, { "constant": true, "inputs": [ { "name": "roomId", "type": "bytes32" } ], "name": "getCommentsByRoomId", "outputs": [ { "name": "rateArray", "type": "uint256[]" }, { "name": "commentArray", "type": "bytes32[]" } ], "payable": false, "type": "function" }, { "constant": true, "inputs": [ { "name": "key", "type": "bytes32" } ], "name": "getBookingInfoByKey", "outputs": [ { "name": "", "type": "string" } ], "payable": false, "type": "function" }, { "constant": false, "inputs": [ { "name": "newBooking", "type": "string" }, { "name": "finalPrice", "type": "uint256" }, { "name": "refereeAddr", "type": "address" } ], "name": "addNewBooking", "outputs": [ { "name": "bookingId", "type": "bytes32" } ], "payable": true, "type": "function" }, { "inputs": [], "payable": false, "type": "constructor" } ]';
-const bookingContractAddr = '0x16C4CEEC682B370C0A4a29F4bEDCb90d8De62450';
+const bookingContractAbi = '[ { "constant": false, "inputs": [ { "name": "roomId", "type": "bytes32" }, { "name": "rate", "type": "uint256" }, { "name": "comment", "type": "bytes32" } ], "name": "addNewReview", "outputs": [ { "name": "", "type": "uint256" } ], "payable": false, "type": "function" }, { "constant": false, "inputs": [ { "name": "newBooking", "type": "bytes32" } ], "name": "addNewBooking", "outputs": [ { "name": "", "type": "uint256" } ], "payable": false, "type": "function" }, { "constant": true, "inputs": [ { "name": "index", "type": "uint256" } ], "name": "getBookingInfoByKey", "outputs": [ { "name": "", "type": "bytes32" } ], "payable": false, "type": "function" }, { "constant": true, "inputs": [ { "name": "", "type": "uint256" } ], "name": "bookingList", "outputs": [ { "name": "", "type": "bytes32" } ], "payable": false, "type": "function" }, { "constant": true, "inputs": [ { "name": "", "type": "uint256" } ], "name": "reviews", "outputs": [ { "name": "roomId", "type": "bytes32" }, { "name": "rate", "type": "uint256" }, { "name": "comment", "type": "bytes32" } ], "payable": false, "type": "function" } ]';
+const bookingContractAddr = '0x9dcdcfa8D682e2E9d142dcd5614092e72604F0C5';
 
 const transferContractAbi = '';
 const transferContractAddr = '';
@@ -24,15 +25,42 @@ const bookingListContract = web3.eth.contract(JSON.parse(bookingContractAbi)).at
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.post('/addNewBooking', (req, res) => {
+app.get('/addNewBooking', (req, res) => {
     console.log('addNewBooking');
     console.log(req.body);
     // check balance
 
     // call to addNewBooking
-    bookingListContract.getBookingInfoByKey('123456', { from: defaultAcc, gas: 500000 }, (error, info) => {
-        console.log('Info: ', info)
-    });
+
+    web3.eth.getAccounts((error, accounts) => {
+        console.log(accounts)
+        web3.eth.getTransactionCount(defaultAcc, (error, txCount) => {
+            let privKey = new Buffer('52f13c2fe2f99e53588eed126380d2e84d02ef867b0b0fce2df40a9de2a534b7', 'hex')
+            let rawTransactionObj = {
+                nonce: web3.toHex(txCount), to: '0xAbC7Ce327EEac6D5CF989cE8b21213Db91d56bc9',
+                value: web3.toHex(web3.toWei(0.01, 'ether')), gasPrice: web3.toHex(21000),
+                gasLimit: web3.toHex(300000),
+            }
+            let tx = new Tx(rawTransactionObj);
+            tx.sign(privKey)
+            let serializeTx = '0x' + tx.serialize().toString('hex')
+    
+            bookingListContract.addNewBooking.sendTransaction('BookingInfo', { from: defaultAcc, gas: 500000 }, (error, info) => {
+                console.log(info);
+                console.log(error);
+            });
+
+            // web3.eth.sendRawTransaction(serializeTx, (error, txHash) => {
+            //     console.log(txHash)
+            // })
+        })
+    })
+
+    //   );
+
+    // bookingListContract.addNewBooking('BookingInfo', { from: defaultAcc, gas: 500000 }, (error, info) => {
+    //     console.log('Info: ', info)
+    // });
 
     res.send('addNewBooking');
 });
@@ -42,8 +70,10 @@ app.post('/addReview', (req, res) => {
     console.log(req.body);
     // call to addReview
     bookingListContract.addNewReview(req.body.roomId, req.body.rate, req.body.comment, { from: defaultAcc, gas: 500000 }, (error, info) => {
-        console.log('Info: ', info)
+        console.log('Info: ', info);
     });
+
+    res.send('addReview');
 });
 
 app.post('/transferMoney', (req, res) => {
