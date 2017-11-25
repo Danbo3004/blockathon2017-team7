@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Container } from "semantic-ui-react";
 import RoomCell from "./RoomCell";
 
 class Home extends Component {
@@ -13,7 +14,11 @@ class Home extends Component {
   }
 
   render() {
-    return this.renderListRoom();
+    return (
+      <Container textAlign="justified" style={{ marginTop: 100 }}>
+        {this.renderListRoom()}
+      </Container>
+    );
   }
 }
 

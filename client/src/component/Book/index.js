@@ -9,7 +9,7 @@ class Book extends Component {
       <div>
         <Picker />
         <Container text style={{ marginTop: "7em" }}>
-          <Header as="h1">This is a fancy HOTEL</Header>
+          <Header as="h1">CHARMING, VERY SPACIOUS & BEST LOCATED</Header>
           <p>
             This is a basic fixed menu template using fixed size containers.
           </p>

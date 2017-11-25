@@ -1,27 +1,42 @@
 import React, { Component } from "react";
-import { Grid, Image, Button } from "semantic-ui-react";
+import { Grid, Image, Button, Container, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+
 class RoomCell extends Component {
   state = {};
   render() {
     return (
       <Grid column={3}>
-        <Grid.Column width={2}>
+        <Grid.Column width={3}>
           <Image
-            src="http://www.euneighbours.eu/sites/default/files/2017-01/placeholder.png"
-            size="medium"
+            src="https://www.hotel-icon.com/public/room/images/2/Hotel_ICON_36type_Harbour.jpg"
+            size="large"
+            fluid
           />
         </Grid.Column>
         <Grid.Column width={8}>
-          <Image
-            src="http://1.semantic-ui.com/images/wireframe/paragraph.png"
-            size="large"
-          />
+          <Container fluid>
+            <div>
+              <Icon name="home" />Hướng phòng: Đường phố
+            </div>
+            <div>
+              <Icon name="resize horizontal" />20 m²/215 ft²
+            </div>
+            <div>
+              <Icon name="ban" />được hút thuốc
+            </div>
+            <div>
+              <Icon name="hotel" />1 phong doi
+            </div>
+            <div>
+              <Icon name="s15" />voi hoa sen
+            </div>
+          </Container>
         </Grid.Column>
         <Grid.Column width={1} verticalAlign="middle">
           <Button.Group>
-            <Button>View</Button>
-            <Button.Or />
+            <Button>263.677₫</Button>
+            <Button.Or text="&" />
             <Link to="/book">
               <Button positive>Book</Button>
             </Link>
