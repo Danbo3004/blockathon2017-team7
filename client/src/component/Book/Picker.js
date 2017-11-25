@@ -14,46 +14,9 @@ class Picker extends Component {
   state = { dateCome: new Date(), dateGo: new Date(), guest: 1 };
   render() {
     return (
-      <Menu icon="labeled" vertical>
-        <Header size="large" style={{ marginTop: 6 }}>
-          5,1 ETH <Label>per night</Label>
-        </Header>
-        <Menu.Item>
-          <Dropdown
-            placeholder="Guests"
-            search
-            selection
-            options={guestOptions}
-            upward
-          />
-        </Menu.Item>
-
-        <Label size="large" style={{ marginBottom: 5 }}>
-          <Icon name="marker" />
-          <Flatpickr
-            data-enable-time
-            value={this.state.dateCome}
-            onChange={dateCome => {
-              this.setState({ dateCome });
-            }}
-          />
-        </Label>
-
-        <Label size="large" style={{ marginBottom: 5 }}>
-          <Icon name="location arrow" />
-          <Flatpickr
-            data-enable-time
-            value={this.state.dateGo}
-            onChange={dateGo => {
-              this.setState({ dateGo });
-            }}
-          />
-        </Label>
-
-        <Link to="/login">
-          <Button color="red">Request to book</Button>
-        </Link>
-      </Menu>
+      <Link to="/login">
+        <Button color="green">Reverse Now</Button>
+      </Link>
     );
   }
 }
