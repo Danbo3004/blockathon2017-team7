@@ -17,7 +17,7 @@ import Picker from "./Picker";
 
 const Wireframe = () => {
   return (
-    <Container text style={{ marginTop: "7em" }}>
+    <Container text style={{ marginTop: "7em" }} textAlign="center">
       <Header as="h1">CHARMING, VERY SPACIOUS & BEST LOCATED</Header>
       <p>
         <Icon name="male" /> 8 guests <Icon name="external" /> 3 bedrooms{" "}
@@ -35,6 +35,7 @@ const Wireframe = () => {
         style={{ marginTop: "2em" }}
       />
       <RoomReview />
+      <Picker />
     </Container>
   );
 };
@@ -93,20 +94,9 @@ class Book extends Component {
     const { calculations, contextRef } = this.state;
 
     return (
-      <div ref={this.handleContextRef}>
-        <Grid columns={2}>
-          <Grid.Column>
-            <Visibility offset={[10, 10]} onUpdate={this.handleUpdate}>
-              <Wireframe />
-            </Visibility>
-          </Grid.Column>
-          <Grid.Column>
-            <Sticky context={contextRef}>
-              <Picker />
-            </Sticky>
-          </Grid.Column>
-        </Grid>
-      </div>
+      <Segment padded>
+        <Wireframe />
+      </Segment>
     );
   }
 }

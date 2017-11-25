@@ -15,8 +15,7 @@ class Picker extends Component {
   render() {
     return (
       <Menu icon="labeled" vertical>
-        <Slideshow />
-        <Header size="large">
+        <Header size="large" style={{ marginTop: 6 }}>
           5,1 ETH <Label>per night</Label>
         </Header>
         <Menu.Item>
